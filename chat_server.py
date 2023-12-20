@@ -1,18 +1,18 @@
 #ITERATIVE SERVING APPROACH
-import time
-import random
-import threading
+import time #Can use the time module in Python scripts to work with time
+import random #for generating or manipulating random integers
+import threading #to run multiple threads (tasks, function calls) at the same time
 from queue import Queue
 from server import Server
 from client import Client
-import signal
-import multiprocessing
-#On Windows, the multiprocessing module is typically used for parallel processing. Both multiprocessing and forking allow creating separate child processes from a parent process.
+import signal #Set handlers for asynchronous events
+import multiprocessing #On Windows, the multiprocessing module is typically used for parallel processing. Both multiprocessing and forking allow creating separate child processes from a parent process.
 #They enable parallel execution of code across multiple processes simultaneously.
 #Processes have their own isolated memory spaces allowing simpler synchronization compared to threads.
-class iterative:
+class iterative: #iterative serving
     class Server:
         def __init__(self, name):
+            #attributes
             self.name = name
             self.clients_attended_day = 0
             self.clients_attended_month = 0
