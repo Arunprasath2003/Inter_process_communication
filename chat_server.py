@@ -121,11 +121,6 @@ class threading:
         def run_server(self):
             server_thread = threading.Thread(target=self.start_serving, daemon=True)
             server_thread.start()
-
-    # client.py
-
-    import time
-
     class Client:
         def __init__(self, name):
             self.name = name
@@ -140,9 +135,7 @@ class threading:
         def record_chat_duration(self, duration):
             self.chat_duration = duration
             print(f"Client {self.name} had a chat duration of {duration} seconds.")
-
-    # simulation.py
-
+            
     def simulate_server(server):#simulate the server
         server.run_server()
 
@@ -198,7 +191,7 @@ class threading:
         print(f"Total Clients: {server_b.total_clients}")
         print(f"Total Lost Clients: {server_b.total_lost_clients}")
 
-    #FORKING TECHNIQUES
+#FORKING TECHNIQUES
 class fork:
     class Client:
         def __init__(self, name):
