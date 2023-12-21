@@ -144,7 +144,7 @@ class threading:
         start_time = time.time()
         time.sleep(random.uniform(0.1, 0.5))
         with server.lock:
-            if server.clients_attended_day >= 3:
+            if server.clients_attended_day >= 3: #if server is already attending 3 clients, then server can't attend the client. Therefore it is lost client
                 print(f"Server {server.name} is busy. Client {client.name} is a lost client.")
                 server.total_lost_clients += 1
             else:
