@@ -16,7 +16,6 @@ class Server:
     The constructor initializes various attributes of the server, such as name, clients_attended_day, total_clients, etc.
     lock is a threading lock used to synchronize access to shared resources.
     client_queue is a queue used for the threaded approach to enqueue clients.
-    serve_client Method:
     '''
     def __init__(self, name):
         self.name = name
