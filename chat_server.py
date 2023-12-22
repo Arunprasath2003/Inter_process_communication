@@ -62,7 +62,7 @@ class Server:
     '''
     def enqueue_client(self, client):
         with self.lock:
-            if self.clients_attended_day >= 3:
+            if self.clients_attended_day >= 3: #4. If no server is available for the waiting period then the session ends and client is requested to start new session later.This client is called lost client.
                 print(f"Server {self.name} is busy. Client {client.name} is a lost client.")
                 self.total_lost_clients += 1
             else:
@@ -89,7 +89,7 @@ class Server:
     '''
     Returns a dictionary containing information about the server, such as its name, the number of clients attended, average rating, etc
     '''
-    def get_server_info(self):
+    def get_server_info(self): #5.Server's user interface should have the following property:
         with self.lock:
             return {
                 "Name": self.name,
@@ -209,11 +209,11 @@ if __name__ == "__main__":
     '''
     Define the number of clients and servers for the load test
     '''
-    num_clients = 1000
-    num_servers = 3
+    num_clients = 1000 #7. Now simulate this client and server communication for 1000s of chat for 1000s of client and limited server. Simulate this process using data from file. This is to carry out load testing.
+    num_servers = 3 #1. Let the number of servers replying to the client be limited. (Say 3)
     servers = [Server(f"Server {i}") for i in range(num_servers)]
     clients = [Client(f"Client {i}") for i in range(num_clients)]  # Define clients here
-
+    #8.
     '''
     Simulate the load test using iterative serving
     '''
