@@ -1,6 +1,7 @@
-import threading
 import time
 import random
+import threading
+import matplotlib.pyplot as plt
 from queue import Queue
 
 class Server:
@@ -38,7 +39,6 @@ class Server:
     def run_server(self):
         server_thread = threading.Thread(target=self.start_serving, daemon=True)
         server_thread.start()
-
 class Client:
     def __init__(self, name):
         self.name = name
@@ -73,38 +73,38 @@ def simulate_client(client, server):
     end_time = time.time()
     client.record_chat_duration(end_time - start_time)
 
-
 if __name__ == "__main__":
     # Create server instances
     server_a = Server("Server A")
     server_b = Server("Server B")
 
-    # Start server threads
-    threading.Thread(target=simulate_server, args=(server_a,), daemon=True).start()
-    threading.Thread(target=simulate_server, args=(server_b,), daemon=True).start()
+    # Vary the number of clients for performance testing
+    client_numbers = [50, 100, 150, 200, 250, 300]
 
-    # Simulate client-server communication
-    for i in range(1000):
-        client = Client(f"Client {i}")
-        if i % 2 == 0:
-            simulate_client(client, server_a)
-        else:
-            simulate_client(client, server_b)
+    # Simulate performance improvement with different numbers of clients
+    performance_results = []
 
-    # Allow time for threads to finish serving remaining clients
-    time.sleep(5)
+    for num_clients in client_numbers:
+        start_time = time.time()
 
-    # Print server statistics
-    print(f"\nServer A Statistics:")
-    print(f"Attended Clients (Day): {server_a.clients_attended_day}")
-    print(f"Attended Clients (Month): {server_a.clients_attended_month}")
-    print(f"Average Rating: {server_a.average_rating}")
-    print(f"Total Clients: {server_a.total_clients}")
-    print(f"Total Lost Clients: {server_a.total_lost_clients}")
+        # Simulate client-server communication
+        for i in range(num_clients):
+            client = Client(f"Client {i}")
+            if i % 2 == 0:
+                simulate_client(client, server_a)
+            else:
+                simulate_client(client, server_b)
 
-    print(f"\nServer B Statistics:")
-    print(f"Attended Clients (Day): {server_b.clients_attended_day}")
-    print(f"Attended Clients (Month): {server_b.clients_attended_month}")
-    print(f"Average Rating: {server_b.average_rating}")
-    print(f"Total Clients: {server_b.total_clients}")
-    print(f"Total Lost Clients: {server_b.total_lost_clients}")
+        # Allow time for threads to finish serving remaining clients
+        time.sleep(5)
+
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        performance_results.append(elapsed_time)
+
+    # Plot the results
+    plt.plot(client_numbers, performance_results, marker='o')
+    plt.title('Performance Improvement with Different Numbers of Clients')
+    plt.xlabel('Number of Clients')
+    plt.ylabel('Elapsed Time (seconds)')
+    plt.show()
