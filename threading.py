@@ -1,10 +1,18 @@
+'''
+Imported necessary modules
+'''
 import time
 import random
 import threading
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt #TO PLOT GRAPH
 from queue import Queue
 
 class Server:
+    '''
+    The constructor initializes various attributes of the server, such as name, clients_attended_day, total_clients, etc.
+    lock is a threading lock used to synchronize access to shared resources.
+    client_queue is a queue used for the threaded approach to enqueue clients.
+    '''
     def __init__(self, name):
         self.name = name
         self.clients_attended_day = 0
@@ -16,6 +24,11 @@ class Server:
         self.client_queue = Queue()
         self.lock = threading.Lock()
 
+    '''
+    Simulates the interaction between the server and a client.
+    Sleeps for a random time to simulate processing.
+    Obtains a rating from the client and updates the server's statistics.
+    '''
     def serve_client(self, client):
         # Simulate server-client interaction
         time.sleep(random.uniform(0.1, 0.5))
@@ -47,6 +60,7 @@ class Client:
         self.chat_duration = 0  # Track the duration of the chat in seconds
 
     def finish_chat(self, rating):
+        # Simulate finishing the chat and providing a rating
         self.rating = rating
         print(f"Client {self.name} has rated Server {self.server_name} with {rating} stars.")
 
