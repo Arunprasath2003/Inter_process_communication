@@ -204,16 +204,22 @@ class Simulate:
     def print_server_info(servers):
         for server in servers:
             print(server.get_server_info())
-     # Calculate load factor for each server
+    # Calculate load factor for each server
         load_factors = []
         for server in servers:
-            load_factor = server.clients_attended_day / (server.clients_attended_day + server.total_lost_clients)
-            load_factors.append(load_factor)
-            print(f"Load Factor for {server.name}: {load_factor}")
+            if(server.clients_attended_day + server.total_lost_clients==0):#Error handling
+                load_factor=0
+            else:
+                load_factor = server.clients_attended_day / (server.clients_attended_day + server.total_lost_clients)
+                load_factors.append(load_factor)
+                print(f"Load Factor for {server.name}: {load_factor}")
 
         # Calculate average load factor
-        average_load_factor = sum(load_factors) / len(load_factors)
-        print(f"Average Load Factor: {average_load_factor}")
+        if(len(load_factors)==0):#Error handling
+            average_load_factor=0
+        else:
+            average_load_factor = sum(load_factors) / len(load_factors)
+            print(f"Average Load Factor: {average_load_factor}")
 
 if __name__ == "__main__":
     '''
