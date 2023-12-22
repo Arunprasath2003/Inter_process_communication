@@ -1,7 +1,8 @@
+#Imported necessary modules
 import time
 import random
 import threading
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt #TO PLOT GRAPH
 
 class Server:
     def __init__(self, name):
@@ -12,7 +13,11 @@ class Server:
         self.total_lost_clients = 0
         self.average_rating = 0.0
         self.current_client = None
-
+    '''
+    Simulates the interaction between the server and a client.
+    Sleeps for a random time to simulate processing.
+    Obtains a rating from the client and updates the server's statistics.
+    '''
     def serve_client(self, client):
         # Simulate server-client interaction
         time.sleep(random.uniform(0.1, 0.5))
@@ -29,7 +34,7 @@ class Server:
     def start_serving(self, clients):
         for client in clients:
             self.serve_client(client)
-
+    
     def run_server(self, clients):
         self.lock = threading.Lock()
         print(f"Server {self.name} started serving clients iteratively.")
@@ -37,11 +42,19 @@ class Server:
         print(f"Server {self.name} finished serving clients. Exiting.")
 
 class Client:
+    '''
+    The constructor initializes various attributes of the client, 
+    such as name, server_name and rating
+    '''
     def __init__(self, name):
         self.name = name
         self.server_name = None
         self.rating = None
-
+    '''
+    Simulates finishing the chat and providing a rating.
+    Sleeps for a short time to simulate processing.
+    Prints a message indicating the client's rating for the server.
+    '''
     def finish_chat(self, rating):
         # Simulate finishing the chat and providing a rating
         time.sleep(0.1)
