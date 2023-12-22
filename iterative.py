@@ -1,6 +1,8 @@
 import time
 import random
 import threading
+import matplotlib.pyplot as plt
+
 class Server:
     def __init__(self, name):
         self.name = name
@@ -22,7 +24,8 @@ class Server:
             self.clients_attended_month += 1
             self.current_client = None
             self.total_clients += 1
-    #ITERATIVE SERVING
+
+    # ITERATIVE SERVING
     def start_serving(self, clients):
         for client in clients:
             self.serve_client(client)
@@ -45,32 +48,35 @@ class Client:
         print(f"Client {self.name} has rated Server {self.server_name} with {rating} stars.")
 
 if __name__ == "__main__":
-    serverA = Server("Server A")
-    serverB = Server("Server B")
+    # Create a function to simulate the performance improvement with different numbers of clients
+    def simulate_performance(client_numbers):
+        results = []
 
-    with open("client_data.txt", "r") as file:
-        client_names = [line.strip() for line in file]
+        for num_clients in client_numbers:
+            server = Server("Server A")
+            clients = [Client(f"Client {i}") for i in range(num_clients)]
 
-    clients = [Client(name) for name in client_names]
+            start_time = time.time()
+            server.run_server(clients)
+            end_time = time.time()
 
-    serverA.run_server(clients)
-    serverB.run_server(clients)
+            # Collect performance metrics
+            elapsed_time = end_time - start_time
+            results.append(elapsed_time)
 
-    # Print server statistics
-    print(f"\nServer A Statistics:")
-    print(f"Attended Clients (Day): {serverA.clients_attended_day}")
-    print(f"Attended Clients (Month): {serverA.clients_attended_month}")
-    print(f"Average Rating: {serverA.average_rating}")
-    print(f"Total Clients: {serverA.total_clients}")
-    print(f"Total Lost Clients: {serverA.total_lost_clients}")
+        return results
+    '''
+    client numbers are varied accordingly
+    '''
+    # Vary the number of clients for performance testing
+    client_numbers = [50, 100, 150, 200, 250, 300]
 
-    print(f"\nServer B Statistics:")
-    print(f"Attended Clients (Day): {serverB.clients_attended_day}")
-    print(f"Attended Clients (Month): {serverB.clients_attended_month}")
-    print(f"Average Rating: {serverB.average_rating}")
-    print(f"Total Clients: {serverB.total_clients}")
-    print(f"Total Lost Clients: {serverB.total_lost_clients}")
-    #LOAD FACTORS
-    load_factor_serverA = serverA.clients_attended_day / (serverA.clients_attended_day + serverA.total_lost_clients)
-    load_factor_serverB = serverB.clients_attended_day / (serverB.clients_attended_day + serverB.total_lost_clients)
-    
+    # Simulate performance improvement with different numbers of clients
+    performance_results = simulate_performance(client_numbers)
+
+    # Plot the results
+    plt.plot(client_numbers, performance_results, marker='o')
+    plt.title('Performance Improvement with Different Numbers of Clients')
+    plt.xlabel('Number of Clients')
+    plt.ylabel('Elapsed Time (seconds)')
+    plt.show()
