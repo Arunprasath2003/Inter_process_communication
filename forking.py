@@ -1,17 +1,30 @@
+'''
+Imported necessary modules
+'''
 import time
 import random
 import os
 import signal
 import multiprocessing
-#On Windows, the multiprocessing module is typically used for parallel processing. Both multiprocessing and forking allow creating separate child processes from a parent process.
-#They enable parallel execution of code across multiple processes simultaneously.
-#Processes have their own isolated memory spaces allowing simpler synchronization compared to threads.
+'''
+On Windows, the multiprocessing module is typically used for parallel processing. Both multiprocessing and forking allow creating separate child processes from a parent process.
+They enable parallel execution of code across multiple processes simultaneously.
+Processes have their own isolated memory spaces allowing simpler synchronization compared to threads.
+'''
 class Client:
+    '''
+    The constructor initializes various attributes of the client, 
+    such as name, server_name and rating
+    '''
     def __init__(self, name):
         self.name = name
         self.server_name = None
         self.rating = None
-
+    '''
+    Simulates finishing the chat and providing a rating.
+    Sleeps for a short time to simulate processing.
+    Prints a message indicating the client's rating for the server.
+    '''
     def finish_chat(self, rating):
         # Simulate finishing the chat and providing a rating
         time.sleep(0.1)
@@ -29,6 +42,11 @@ class Server:
         self.client_queue = []
         self.lock = multiprocessing.Lock()
 
+    '''
+    Simulates the interaction between the server and a client.
+    Sleeps for a random time to simulate processing.
+    Obtains a rating from the client and updates the server's statistics.
+    '''
     def serve_client(self, client):
         # Simulate server-client interaction
         time.sleep(random.uniform(0.1, 0.5))
@@ -40,17 +58,24 @@ class Server:
             self.clients_attended_month += 1
             self.current_client = None
             self.total_clients += 1
-
+    '''
+    Iteratively serves a list of clients using the serve_client method.
+    '''
     def start_serving(self):
         for client in self.client_queue:
             self.serve_client(client)
-
+    '''
+    Initiates the iterative serving process and prints messages about server status.
+    '''
     def run_server(self):
         signal.signal(signal.SIGINT, signal.SIG_IGN)
         print(f"Server {self.name} started serving clients using multiprocessing.")
         self.start_serving()
         print(f"Server {self.name} finished serving clients. Exiting.")
-
+'''
+ The function determines whether the server can attend to the client or if the client should be marked as lost. 
+ If the server is available, the client is added to the server's queue, and the server starts serving the client.
+'''
 def simulate_client(server, client):
     if server.clients_attended_day >= 3:
         print(f"Server {server.name} is busy. Client {client.name} is a lost client.")
