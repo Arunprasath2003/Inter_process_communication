@@ -35,6 +35,11 @@ Task of creating chat server using different approaches:
 <img width="286" alt="forking output" src="https://github.com/Arunprasath2003/Inter_process_communication/assets/98107416/76447d80-640f-4b9b-a295-3535499951a3">
 <br>
 
+**Performance improvement over different number of clients**
+<br>
+<img width="477" alt="performance improvement iterative" src="https://github.com/Arunprasath2003/Inter_process_communication/assets/98107416/8869f79a-eae0-4d79-ab6f-7023ab4e7f6a">
+<br>
+
 **In summary:**
 1.	Iterative serving has no concurrency
 2.	Threading provides concurrency via parallel threads in same process
