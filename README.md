@@ -37,6 +37,10 @@ Task of creating chat server using different approaches:
 
 **Performance improvement over different number of clients**
 <br>
+
+The graph shows how the elapsed time varies with the number of clients, providing insights into the performance of the server under different loads. The elapsed time increases as the number of clients increases.
+<br>
+
 <img width="477" alt="performance improvement iterative" src="https://github.com/Arunprasath2003/Inter_process_communication/assets/98107416/8869f79a-eae0-4d79-ab6f-7023ab4e7f6a">
 <br>
 
