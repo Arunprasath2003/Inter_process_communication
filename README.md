@@ -44,4 +44,39 @@ Task of creating chat server using different approaches:
 1.	Iterative serving has no concurrency
 2.	Threading provides concurrency via parallel threads in same process
 3.	Forking provides concurrency via new processes with separate memory
+<br>
+
+**Pre threaded and pre forked approach:**
+<br>
+Pre-forked and pre-threaded are techniques used in server design to optimize performance by pre-initializing a pool of forked processes or threads that can handle client connections in parallel.
+<br>
+
+**Pre-forked Approach:**
+
+1. A master parent process pre-forks multiple child process copies of itself at startup using fork() system call.
+2. The child processes then listen for incoming client connections concurrently.
+3. When a connection arrives, it is accepted by one of the available child processes from the pool.
+4. After serving the client, the child process returns to the pool ready for next connection.
+<br>
+
+**Advantages:**
+<br>
+1. Avoids overhead of creating new processes for every connection.
+2. Allows parallel processing of multiple clients due to pre-created pool.
+<br>
+
+**Pre-threaded Approach:**
+
+1. The server pre-initializes a pool of threads at startup and reuses them.
+2. An acceptor thread picks incoming connections and passes to worker threads.
+3. Once request is served, worker thread returns to pool.
+<br>
+
+**Advantages:**
+<br>
+1. Faster than creating new threads per request.
+2. Achieves parallel execution via fewer threads than processes.
+<br>
+
+So in summary, pre-forking and threading optimizes servers by initializing resources for concurrency upfront before traffic starts.
 
