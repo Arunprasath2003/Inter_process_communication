@@ -6,11 +6,12 @@ Creating a pre-forked server in Cm involves using the
 fork system call to create child processes that handle client requests
 */
 //The server forks multiple child processes to handle incoming connections concurrently.
+//used linux(ubuntu) to run this code
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
-#include <sys/socket.h>
+#include <sys/socket.h> // works only on unix based systems
 #include <netinet/in.h>
 #include <sys/wait.h>
 
