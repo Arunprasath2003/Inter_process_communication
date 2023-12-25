@@ -5,35 +5,33 @@ true parallelism may not be achieved with threads or forks. So that I used C.
 Creating a pre-forked server in Cm involves using the 
 fork system call to create child processes that handle client requests
 */
+//The server forks multiple child processes to handle incoming connections concurrently.
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <sys/wait.h>
 
 #define PORT 8080
 #define MAX_CHILDREN 5
-/*
-Each child process continuously accepts client connections and delegates the handling of each connection 
-to the handle_client function
-*/
+
 void handle_client(int client_socket) {
     // Simulate server-client interaction
     sleep(1);
-    // Add your server logic here
+    // Obtain rating from client
+    int rating = rand() % 5 + 1;
+    printf("Server handling client. Rating: %d\n", rating);
 
     close(client_socket);
 }
 
 int main() {
-    int server_socket, client_socket, child_pid, status;
+    int server_socket, client_socket, child_pid;
     struct sockaddr_in server_addr, client_addr;
     socklen_t client_len = sizeof(client_addr);
 
-    /*
-    The server creates a socket, binds it to a port, and listens for incoming connections.
-    */
     // Create socket
     server_socket = socket(AF_INET, SOCK_STREAM, 0);
     if (server_socket == -1) {
@@ -57,14 +55,14 @@ int main() {
         perror("Error listening for connections");
         exit(EXIT_FAILURE);
     }
-    /*
-    The server enters a loop where it forks multiple child processes, each capable of handling a client connection.
-    */
+
     // Pre-forking loop
     for (int i = 0; i < MAX_CHILDREN; ++i) {
         child_pid = fork();
 
         if (child_pid == 0) { // Child process
+            printf("Child process created with PID %d\n", getpid());
+
             while (1) {
                 // Accept a connection
                 client_socket = accept(server_socket, (struct sockaddr*)&client_addr, &client_len);
@@ -77,16 +75,16 @@ int main() {
                 handle_client(client_socket);
             }
         } else if (child_pid > 0) { // Parent process
-            printf("Child process created with PID %d\n", child_pid);
+            printf("Parent process continuing\n");
         } else {
             perror("Error forking process");
             exit(EXIT_FAILURE);
         }
     }
 
-    // Wait for all child processes to finish
+    // Parent process waits for all child processes to finish
     for (int i = 0; i < MAX_CHILDREN; ++i) {
-        waitpid(-1, &status, 0);
+        wait(NULL);
     }
 
     // Close the server socket
