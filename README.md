@@ -63,6 +63,9 @@ Pre-forked and pre-threaded are techniques used in server design to optimize per
 4. After serving the client, the child process returns to the pool ready for next connection.
 <br>
 
+![Screenshot from 2023-12-25 12-12-24](https://github.com/Arunprasath2003/Inter_process_communication/assets/98107416/9cad03a8-4613-4604-9aaf-5bdeee31562f)
+<br>
+
 **Advantages:**
 <br>
 1. Avoids overhead of creating new processes for every connection.
