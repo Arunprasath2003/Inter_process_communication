@@ -111,7 +111,7 @@ class prethreaded:
     if __name__ == "__main__":
         '''
         Two server instances (server_a and server_b) are created and their threads are started before any clients 
-        interact with them.
+        interact with them.(pre threaded approach)
         '''
         # Create server instances
         server_a = Server("Server A")
