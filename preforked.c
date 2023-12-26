@@ -43,7 +43,7 @@ int main() {
     // Set up server address struct
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = INADDR_ANY;
-    server_addr.sin_port = htons(PORT);
+    server_addr.sin_port = htons(PORT);//The htons() function in C is used to convert a unsigned short integer from host byte order to network byte order.
 
     // Bind socket to address
     if (bind(server_socket, (struct sockaddr*)&server_addr, sizeof(server_addr)) == -1) {
