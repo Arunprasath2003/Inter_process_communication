@@ -78,6 +78,8 @@ Pre-forked and pre-threaded are techniques used in server design to optimize per
 2. An acceptor thread picks incoming connections and passes to worker threads.
 3. Once request is served, worker thread returns to pool.
 <br>
+<img width="393" alt="prethreading output" src="https://github.com/Arunprasath2003/Inter_process_communication/assets/98107416/630bfee7-65a9-493f-91ea-2c3ad079fd01">
+<br>
 
 **Advantages:**
 <br>
