@@ -90,7 +90,7 @@ class forking:
             print(f"Client {client.name} is being served by Server {server.name}.")
 
     if __name__ == "__main__":
-        serverA = Server("Server A")
+        serverA = Server("Server A")#class object is called
         serverB = Server("Server B")
 
         with open("client_data.txt", "r") as file:
