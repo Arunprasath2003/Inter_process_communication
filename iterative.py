@@ -65,12 +65,17 @@ class iterative:
             print(f"Client {self.name} has rated Server {self.server_name} with {rating} stars.")
 
     if __name__ == "__main__":
+        '''
+        The class objects (Server and Client) are instantiated and their methods are called within the 
+        simulate_performance function, which serves as the main driver for the simulation. 
+        The script then uses the results to create a performance improvement plot using Matplotlib.
+        '''
         # Create a function to simulate the performance improvement with different numbers of clients
         def simulate_performance(client_numbers):
             results = []
 
             for num_clients in client_numbers:
-                server = Server("Server A")
+                server = Server("Server A")#class object called here
                 clients = [Client(f"Client {i}") for i in range(num_clients)]
 
                 start_time = time.time()
