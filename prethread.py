@@ -113,7 +113,7 @@ class prethreaded:
         Two server instances (server_a and server_b) are created and their threads are started before any clients 
         interact with them.(pre threaded approach)
         '''
-        # Create server instances
+        # Create server instances(objects)
         server_a = Server("Server A")
         server_b = Server("Server B")
 
