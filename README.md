@@ -49,6 +49,12 @@ Threading performance improvement over different number of clients
 <img width="473" alt="performance improvement threading" src="https://github.com/Arunprasath2003/Inter_process_communication/assets/98107416/28c87b0f-fce6-40dd-abac-1a2175df6ffe">
 
 <br>
+Forking perfomance improvement over different number of clients
+<br>
+
+![performance improvement forking](https://github.com/Arunprasath2003/Inter_process_communication/assets/98107416/ea5ef72e-06a9-481f-abf4-501557c48ec3)
+
+<br>
 Prethreading performance improvement over different number of clients
 <br>
 
