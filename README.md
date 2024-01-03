@@ -43,6 +43,12 @@ The graph shows how the elapsed time varies with the number of clients, providin
 
 <img width="477" alt="performance improvement iterative" src="https://github.com/Arunprasath2003/Inter_process_communication/assets/98107416/8869f79a-eae0-4d79-ab6f-7023ab4e7f6a">
 <br>
+Threading performance improvement over different number of clients
+<br>
+
+<img width="473" alt="performance improvement threading" src="https://github.com/Arunprasath2003/Inter_process_communication/assets/98107416/28c87b0f-fce6-40dd-abac-1a2175df6ffe">
+
+<br>
 
 **In summary:**
 1.	Iterative serving has no concurrency
