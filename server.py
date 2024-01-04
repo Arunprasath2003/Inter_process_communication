@@ -6,6 +6,9 @@ from queue import Queue
 
 class Server:
     def __init__(self, name):
+        '''
+        The constructor initializes various attributes of the server, such as name, clients_attended_day, total_clients, etc.
+        '''
         self.name = name
         self.clients_attended_day = 0
         self.clients_attended_month = 0
@@ -17,6 +20,11 @@ class Server:
         self.lock = threading.Lock()
 
     def serve_client(self, client):
+        '''
+        Simulates the interaction between the server and a client.
+        Sleeps for a random time to simulate processing.
+        Obtains a rating from the client and updates the server's statistics.
+        '''
         # Simulate server-client interaction
         time.sleep(random.uniform(0.1, 0.5))
         # Obtain rating from client
